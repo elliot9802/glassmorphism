@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Travel App</title>
+    <link
+      href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css"
+      rel="stylesheet"
+    />
+    <style>
+      body,
+      html {
+        height: 100%;
+        margin: 0;
+        overflow: hidden;
+      }
+      body {
+        position: relative;
+        background: linear-gradient(135deg, #3a1c71, #d76d77, #ffaf7b);
+        height: 100vh;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+      }
+      .gradient-background {
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        opacity: 0;
+        z-index: -1;
+        animation: gradientFadeInOut 20s infinite linear alternate;
+      }
+      .gradient-background:nth-child(1) {
+        background: linear-gradient(135deg, #08a5c9a1, #ebc30f8e);
+        animation-delay: 3s;
+      }
+
+      .gradient-background:nth-child(2) {
+        background: linear-gradient(45deg, #e40f528c, #23042ed2);
+        animation-delay: 10s;
+      }
+
+      .gradient-background:nth-child(3) {
+        background: linear-gradient(135deg, #42275a, #48a589);
+        animation-delay: 20s;
+      }
+
+      .gradient-background:nth-child(4) {
+        background: linear-gradient(45deg, #de6161, #011550);
+        animation-delay: 30s;
+      }
+      @keyframes gradientFadeInOut {
+        0%,
+        90% {
+          opacity: 0;
+        }
+        25%,
+        65% {
+          opacity: 1;
+        }
+        100% {
+          opacity: 0;
+        }
+      }
+      .glass {
+        background: rgba(255, 255, 255, 0.1);
+        /* backdrop-filter: blur(15px); */
+        border-radius: 1rem;
+        border: 1px solid rgba(255, 255, 255, 0.3);
+        z-index: 10;
+      }
+
+      .nav-tabs {
+        display: flex;
+        justify-content: center;
+        gap: 5rem;
+        padding-bottom: 0.5rem;
+        margin-bottom: 2rem;
+      }
+
+      .nav-tab {
+        padding: 0 0.3rem;
+        opacity: 0.4;
+        position: relative;
+        transition: opacity 0.3s;
+      }
+
+      .nav-tab.active {
+        opacity: 1;
+        font-weight: 600;
+      }
+
+      .nav-tab::after {
+        content: "";
+        display: block;
+        width: 0;
+        height: 3px;
+        background: white;
+        position: absolute;
+        bottom: -1px;
+        left: 0;
+        transition: width 0.3s;
+      }
+
+      .nav-tab.active::after {
+        content: "";
+        display: block;
+        width: 100%;
+        height: 3px;
+        background: white;
+        position: absolute;
+        bottom: 0;
+        left: 0;
+      }
+    </style>
+  </head>
+  <body
+    class="flex items-center justify-center bg-gradient-to-br from-purple-800 to-red-500 to-yellow-300 h-screen overflow-hidden relative"
+  >
+    <div class="gradient-background"></div>
+    <div class="gradient-background"></div>
+    <div class="gradient-background"></div>
+    <div class="gradient-background"></div>
+
+    <div
+      class="glass backdrop-blur-md bg-white/10 rounded-lg border border-white/30 p-8 text-white w-4/5 h-4/5 z-10 max-w-4xl"
+    >
+      <div class="flex justify-between items-center">
+        <h1 class="text-2xl font-bold">Travel App</h1>
+        <div class="flex gap-10">
+          <button class="nav-tab active" id="nav-attractions">
+            Attractions
+          </button>
+          <button class="nav-tab" id="nav-persons">Persons</button>
+        </div>
+      </div>
+    </div>
+    <script>
+      const tabs = document.querySelectorAll(".nav-tab");
+      tabs.forEach((tab) => {
+        tab.addEventListener("click", function () {
+          tabs.forEach((t) => t.classList.remove("active"));
+          this.classList.add("active");
+        });
+      });
+    </script>
+  </body>
+</html>
